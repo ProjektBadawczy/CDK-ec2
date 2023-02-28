@@ -5,8 +5,8 @@ on:
     branches: [ "master" ]
   workflow_dispatch:
     inputs:
-      instanceType:
-        description: 'Instance type'     
+      instance:
+        description: 'Amazon EC2 T2 Instances'     
         required: true
         type: 'choice'
         options:
