@@ -34,3 +34,14 @@ class CdkEc2Stack(Stack):
         role = iam.Role(self, "InstanceSSM", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
 
         role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AmazonSSMManagedInstanceCore"))
+
+        version = self.node.try_get_context("instance")
+
+        # Instance
+        instance = ec2.Instance(self, "Instance",
+            instance_type=ec2.InstanceType(version),
+            machine_image=amzn_linux,
+            vpc = vpc,
+            role = role
+            )
+
