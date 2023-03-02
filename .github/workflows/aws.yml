@@ -51,4 +51,4 @@ jobs:
       run: cdk synth
 
     - name: CDK Deploy
-      run: cdk deploy --require-approval never
+      run: cdk deploy --require-approval never --parameters instance=${{ inputs.instance }}
