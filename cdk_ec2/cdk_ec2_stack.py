@@ -9,7 +9,6 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-dirname = os.path.dirname(__file__)
 class CdkEc2Stack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -45,7 +44,7 @@ class CdkEc2Stack(Stack):
             )
 
         # Script in S3 as Asset
-        asset = Asset(self, "Asset", path=os.path.join(dirname, "configure.sh"))
+        asset = Asset(self, "Asset", path="../configure.sh")
         local_path = instance.user_data.add_s3_download_command(
             bucket=asset.bucket,
             bucket_key=asset.s3_object_key
