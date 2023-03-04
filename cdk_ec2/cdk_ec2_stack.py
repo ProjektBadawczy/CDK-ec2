@@ -15,7 +15,9 @@ class CdkEc2Stack(Stack):
         # VPC
         vpc = ec2.Vpc(self, "VPC",
                       nat_gateways=0,
-                      subnet_configuration=[ec2.SubnetConfiguration(name="public", subnet_type=ec2.SubnetType.PUBLIC)]
+                      subnet_configuration=
+                      [ec2.SubnetConfiguration(name="public", subnet_type=ec2.SubnetType.PUBLIC),
+                       ec2.SubnetConfiguration(name="private", subnet_type=ec2.SubnetType.PRIVATE)]
                       )
 
         # AMI
