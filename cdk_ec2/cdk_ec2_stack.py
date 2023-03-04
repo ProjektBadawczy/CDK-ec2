@@ -31,7 +31,7 @@ class CdkEc2Stack(Stack):
         # Instance Role and SSM Managed Policy
         role = iam.Role(self, "InstanceSSM", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
 
-        role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AdministratorAccess"))
+        role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AmazonSSMManagedInstanceCore"))
 
         # Create a security group that allows HTTP traffic on port 80 for our
         # containers without modifying the security group on the instance
