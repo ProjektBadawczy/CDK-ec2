@@ -66,7 +66,7 @@ class CdkEc2Stack(Stack):
             )
 
         # Script in S3 as Asset
-        asset = Asset(self, "Asset", path="../.github/scripts/configure.sh")
+        asset = Asset(self, "Asset", path=os.path.join(dirname, "configure.sh"))
         local_path = instance_applications.user_data.add_s3_download_command(
             bucket=asset.bucket,
             bucket_key=asset.s3_object_key
