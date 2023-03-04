@@ -51,6 +51,10 @@ class CdkEc2Stack(Stack):
             ec2.Port.tcp(22),
         )
 
+        cfn_key_pair = ec2.CfnKeyPair(self, "MyCfnKeyPair",
+            key_name="keyName"
+            )
+
         # Instance for applications
         instance_applications = ec2.Instance(self, "InstanceApplications",
             instance_type=ec2.InstanceType("t3.micro"),
