@@ -16,8 +16,7 @@ class CdkEc2Stack(Stack):
         vpc = ec2.Vpc(self, "VPC",
                       nat_gateways=0,
                       subnet_configuration=
-                      [ec2.SubnetConfiguration(name="public", subnet_type=ec2.SubnetType.PUBLIC),
-                       ec2.SubnetConfiguration(name="private", subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT)]
+                      [ec2.SubnetConfiguration(name="public", subnet_type=ec2.SubnetType.PUBLIC)]
                       )
 
         # AMI
@@ -49,15 +48,17 @@ class CdkEc2Stack(Stack):
         instance_applications = ec2.Instance(self, "InstanceApplications",
             instance_type=ec2.InstanceType("t3.nano"),
             machine_image=amzn_linux,
-            vpc = vpc,
-            role = role
+            vpc=vpc,
+            role=role,
+            security_group=security_group
             )
 
         # Instance for JMeter
         instance_testing = ec2.Instance(self, "InstanceTesting",
             instance_type=ec2.InstanceType("t3.nano"),
             machine_image=amzn_linux,
-            vpc = vpc,
-            role = role
+            vpc=vpc,
+            role=role,
+            security_group=security_group
             )
 
