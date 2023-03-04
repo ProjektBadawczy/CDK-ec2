@@ -43,10 +43,12 @@ class CdkEc2Stack(Stack):
         security_group.add_ingress_rule(
             ec2.Peer.any_ipv4(),
             ec2.Port.tcp(80),
-            ec2.Port.tcp(22) #SSH
         )
 
+        # SSH connection
         security_group.add_ingress_rule(
+            ec2.Peer.any_ipv4(),
+            ec2.Port.tcp(22),
         )
 
         # Instance for applications
