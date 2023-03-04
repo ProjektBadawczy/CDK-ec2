@@ -1,7 +1,9 @@
+import aws_cdk as core
+
 from aws_cdk import (
     aws_ec2 as ec2,
     aws_iam as iam,
-    Stack, core
+    Stack
 )
 from constructs import Construct
 
