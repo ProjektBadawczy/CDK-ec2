@@ -42,16 +42,16 @@ class CdkEc2Stack(Stack):
 
         security_group.add_ingress_rule(
             ec2.Peer.any_ipv4(),
-            ec2.Port.tcp(80)
+            ec2.Port.tcp(80),
+            ec2.Port.tcp(22) #SSH
         )
 
         security_group.add_ingress_rule(
-            ec2.Protocol('ICMP'),
         )
 
         # Instance for applications
         instance_applications = ec2.Instance(self, "InstanceApplications",
-            instance_type=ec2.InstanceType("t3.nano"),
+            instance_type=ec2.InstanceType("t3.micro"),
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
@@ -60,7 +60,7 @@ class CdkEc2Stack(Stack):
 
         # Instance for JMeter
         instance_testing = ec2.Instance(self, "InstanceTesting",
-            instance_type=ec2.InstanceType("t3.nano"),
+            instance_type=ec2.InstanceType("t3.micro"),
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
