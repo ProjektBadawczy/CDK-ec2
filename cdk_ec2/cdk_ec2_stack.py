@@ -39,6 +39,12 @@ class CdkEc2Stack(Stack):
             vpc=vpc,
             allow_all_outbound=True
         )
+
+        acl_icmp = ec2.AclIcmp(
+            code=-1,
+            type=-1
+        )
+
         security_group.add_ingress_rule(
             ec2.Peer.any_ipv4(),
             ec2.Port.tcp(80)
