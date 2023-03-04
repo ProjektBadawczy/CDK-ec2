@@ -35,12 +35,12 @@ class CdkEc2Stack(Stack):
         # Instance Role and SSM Managed Policy
         role = iam.Role(self, "InstanceSSM", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
 
-        role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AmazonSSMManagedInstanceCore"))
+        role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AdministratorAccess"))
 
         # Create a security group that allows HTTP traffic on port 80 for our
         # containers without modifying the security group on the instance
         security_group = ec2.SecurityGroup(
-            self, "nginx--7623",
+            self, "group",
             vpc=vpc,
             allow_all_outbound=False
         )
@@ -66,7 +66,7 @@ class CdkEc2Stack(Stack):
             )
 
         # Script in S3 as Asset
-        asset = Asset(self, "Asset", path="../configure.sh")
+        asset = Asset(self, "Asset", path="../.github/scripts/configure.sh")
         local_path = instance_applications.user_data.add_s3_download_command(
             bucket=asset.bucket,
             bucket_key=asset.s3_object_key
