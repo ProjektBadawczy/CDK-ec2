@@ -1,5 +1,3 @@
-from aws_cdk.aws_s3_assets import Asset
-
 from aws_cdk import (
     aws_ec2 as ec2,
     aws_iam as iam,
@@ -29,14 +27,14 @@ class CdkEc2Stack(Stack):
         )
 
         # Instance Role and SSM Managed Policy
-        role = iam.Role(self, "InstanceSSM", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
+        role = iam.Role(self, "Role", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
 
-        role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AmazonSSMManagedInstanceCore"))
+        role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AdministratorAccess"))
 
         # Create a security group that allows HTTP traffic on port 80 for our
         # containers without modifying the security group on the instance
         security_group = ec2.SecurityGroup(
-            self, "group",
+            self, "SecurityGroup",
             vpc=vpc,
             allow_all_outbound=True
         )
@@ -46,7 +44,7 @@ class CdkEc2Stack(Stack):
         )
 
         # Instance for applications
-        instance_applications = ec2.Instance(self, "Instance_applications",
+        instance_applications = ec2.Instance(self, "InstanceApplications",
             instance_type=ec2.InstanceType("t3.nano"),
             machine_image=amzn_linux,
             vpc = vpc,
@@ -54,24 +52,10 @@ class CdkEc2Stack(Stack):
             )
 
         # Instance for JMeter
-        instance_testing = ec2.Instance(self, "Instance_testing",
+        instance_testing = ec2.Instance(self, "InstanceTesting",
             instance_type=ec2.InstanceType("t3.nano"),
             machine_image=amzn_linux,
             vpc = vpc,
             role = role
             )
-
-        # Script in S3 as Asset
-        asset = Asset(self, "Asset", path="../configure.sh")
-
-        local_path = instance_applications.user_data.add_s3_download_command(
-            bucket=asset.bucket,
-            bucket_key=asset.s3_object_key
-        )
-
-        # Userdata executes script from S3
-        instance_applications.user_data.add_execute_file_command(
-            file_path=local_path
-            )
-        asset.grant_read(instance_applications.role)
 
