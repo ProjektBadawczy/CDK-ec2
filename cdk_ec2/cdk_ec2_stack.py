@@ -1,7 +1,7 @@
 from aws_cdk import (
     aws_ec2 as ec2,
     aws_iam as iam,
-    Stack,
+    Stack, core
 )
 from constructs import Construct
 
@@ -70,4 +70,11 @@ class CdkEc2Stack(Stack):
             security_group=security_group,
             key_name="ssh-key"
             )
+
+        core.CfnOutput(
+            scope=self,
+            id="InstanceApplicationsPublicIp",
+            value=instance_applications.instance_public_ip,
+            description="Public IP of InstanceApplications",
+            export_name="ec2-public-ip-applications")
 
