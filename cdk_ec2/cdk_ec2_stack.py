@@ -42,7 +42,7 @@ class CdkEc2Stack(Stack):
         security_group = ec2.SecurityGroup(
             self, "group",
             vpc=vpc,
-            allow_all_outbound=False
+            allow_all_outbound=True
         )
         security_group.add_ingress_rule(
             ec2.Peer.any_ipv4(),
@@ -66,7 +66,8 @@ class CdkEc2Stack(Stack):
             )
 
         # Script in S3 as Asset
-        asset = Asset(self, "Asset", path="configure.sh")
+        asset = Asset(self, "Asset", path="../.github/scripts/configure.sh")
+
         local_path = instance_applications.user_data.add_s3_download_command(
             bucket=asset.bucket,
             bucket_key=asset.s3_object_key
