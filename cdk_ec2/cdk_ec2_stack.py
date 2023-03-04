@@ -1,5 +1,3 @@
-import os
-
 from aws_cdk.aws_s3_assets import Asset
 
 from aws_cdk import (
@@ -8,8 +6,6 @@ from aws_cdk import (
     Stack,
 )
 from constructs import Construct
-
-dirname = os.path.dirname(__file__)
 
 class CdkEc2Stack(Stack):
 
@@ -66,7 +62,7 @@ class CdkEc2Stack(Stack):
             )
 
         # Script in S3 as Asset
-        asset = Asset(self, "Asset", path="../.github/scripts/configure.sh")
+        asset = Asset(self, "Asset", path="../configure.sh")
 
         local_path = instance_applications.user_data.add_s3_download_command(
             bucket=asset.bucket,
