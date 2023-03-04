@@ -51,18 +51,14 @@ class CdkEc2Stack(Stack):
             ec2.Port.tcp(22),
         )
 
-        cfn_key_pair = ec2.CfnKeyPair(self, "ssh-key",
-            key_name="ssh-key",
-            public_key_material="publicKeyMaterial"
-            )
-
         # Instance for applications
         instance_applications = ec2.Instance(self, "InstanceApplications",
             instance_type=ec2.InstanceType("t3.micro"),
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
-            security_group=security_group
+            security_group=security_group,
+            key_name="ssh-key"
             )
 
         # Instance for JMeter
@@ -71,6 +67,7 @@ class CdkEc2Stack(Stack):
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
-            security_group=security_group
+            security_group=security_group,
+            key_name="ssh-key"
             )
 
