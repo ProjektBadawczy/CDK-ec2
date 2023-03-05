@@ -31,4 +31,4 @@ jobs:
       run: 'pip3 install -r requirements.txt'
       
     - name: CDK Destroy
-      run: cdk destroy -y
+      run: cdk destroy --force
