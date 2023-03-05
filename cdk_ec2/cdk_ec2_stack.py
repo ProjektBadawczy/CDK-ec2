@@ -73,10 +73,3 @@ class CdkEc2Stack(Stack):
             key_name="ssh-key"
             )
 
-        core.CfnOutput(
-            scope=self,
-            id="InstanceApplicationsPublicIp",
-            value=instance_applications.instance_public_ip,
-            description="Public IP of InstanceApplications",
-            export_name="ec2-public-ip-applications")
-
