@@ -25,7 +25,6 @@ jobs:
   deploy:
     name: Create EC2 instance in AWS
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
     - name: Checkout
