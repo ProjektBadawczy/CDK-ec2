@@ -1,4 +1,4 @@
-name: Deploy to Amazon EC2
+name: 1. Create AWS EC2 infrastracture
 
 on:
   push:
@@ -22,8 +22,8 @@ env:
   AWS_REGION: eu-central-1
   
 jobs:
-  deploy:
-    name: Create EC2 instance in AWS
+  create:
+    name: Create AWS EC2 infrastracture
     runs-on: ubuntu-latest
 
     steps:
