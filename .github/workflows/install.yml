@@ -1,10 +1,10 @@
-name: "Connect to AWS EC2 instance"
+name: "2. Connect to AWS EC2 and install docker"
 
 on: workflow_dispatch
 
 jobs:
   connect_ssh:
-    name: Connect to EC2 instance via SSH
+    name: Connect to AWS EC2 and install docker
     runs-on: ubuntu-latest
 
     steps:
