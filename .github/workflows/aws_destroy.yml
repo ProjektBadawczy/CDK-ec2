@@ -1,4 +1,4 @@
-name: 3. Destroy AWS EC2 infrastructure
+name: 4. Destroy AWS EC2 infrastructure
 
 on: workflow_dispatch
 
