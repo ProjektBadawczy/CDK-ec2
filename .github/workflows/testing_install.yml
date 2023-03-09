@@ -8,17 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
-
-      - name: Connect to AWS EC2
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.AWS_TESTING_DNS }}
-          REMOTE_USER: ec2-user
-          TARGET: /home/ec2-user
-          
       - name: Install docker
         uses: appleboy/ssh-action@master
         with:
