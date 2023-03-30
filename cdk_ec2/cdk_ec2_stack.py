@@ -7,6 +7,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+
 class CdkEc2Stack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -59,9 +60,12 @@ class CdkEc2Stack(Stack):
             ec2.Port.tcp(22),
         )
 
+        instance_type = core.CfnParameter(self, "instanceType", type="String",
+                                          description="The instance type for EC2 machines")
+
         # Instance for applications
         instance_applications = ec2.Instance(self, "InstanceApplications",
-            instance_type=ec2.InstanceType("t3.micro"),
+            instance_type=ec2.InstanceType(instance_type),
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
@@ -71,7 +75,7 @@ class CdkEc2Stack(Stack):
 
         # Instance for JMeter
         instance_testing = ec2.Instance(self, "InstanceTesting",
-            instance_type=ec2.InstanceType("t3.micro"),
+            instance_type=ec2.InstanceType(instance_type),
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
