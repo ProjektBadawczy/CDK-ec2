@@ -65,7 +65,7 @@ class CdkEc2Stack(Stack):
 
         # Instance for applications
         instance_applications = ec2.Instance(self, "InstanceApplications",
-            instance_type=ec2.InstanceType(instance_type),
+            instance_type=ec2.InstanceType(instance_type.value_as_string),
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
@@ -75,7 +75,7 @@ class CdkEc2Stack(Stack):
 
         # Instance for JMeter
         instance_testing = ec2.Instance(self, "InstanceTesting",
-            instance_type=ec2.InstanceType(instance_type),
+            instance_type=ec2.InstanceType(instance_type.value_as_string),
             machine_image=amzn_linux,
             vpc=vpc,
             role=role,
