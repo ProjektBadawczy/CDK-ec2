@@ -1,31 +1,14 @@
-name: Deploy to Amazon EC2
+name: 4. Destroy AWS EC2 infrastructure
 
-on:
-  push:
-    branches: [ "master" ]
-  workflow_dispatch:
-    inputs:
-      instance:
-        description: 'Amazon EC2 T2 Instances'     
-        required: true
-        type: 'choice'
-        options:
-        - t2.nano
-        - t2.micro
-        - t2.small
-        - t2.medium
-        - t2.large
-        - t2.xlarge
-        - t2.2xlarge
+on: workflow_dispatch
 
 env:
   AWS_REGION: eu-central-1
   
 jobs:
-  deploy:
-    name: Create EC2 instance in AWS
+  create:
+    name: Destroy AWS EC2 infrastructure
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
     - name: Checkout
@@ -47,8 +30,5 @@ jobs:
     - name: Install Requirements 
       run: 'pip3 install -r requirements.txt'
       
-    - name: CDK Synth 
-      run: cdk synth
-
-    - name: CDK Deploy
-      run: cdk deploy --require-approval never
+    - name: CDK Destroy
+      run: cdk destroy --force

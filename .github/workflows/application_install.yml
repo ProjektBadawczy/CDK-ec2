@@ -1,0 +1,35 @@
+name: "2. Connect to application instance and install docker"
+
+on: workflow_dispatch
+
+jobs:
+  connect_ssh:
+    name: Connect to application instance and install docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install docker
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.AWS_APPLICATION_DNS }}
+          username: ec2-user
+          port: 22 
+          script: |
+            sudo yum update -y &&\
+             sudo amazon-linux-extras install docker &&\
+              sudo yum install docker &&\
+               sudo service docker start &&\ 
+                 sudo usermod -a -G docker ec2-user &&\
+                  newgrp docker
+                  
+      - name: Install docker-compose
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.AWS_APPLICATION_DNS }}
+          username: ec2-user
+          port: 22 
+          script: |
+            sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose &&\
+             sudo chmod +x /usr/local/bin/docker-compose
