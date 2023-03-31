@@ -24,7 +24,8 @@ class CdkEc2Stack(Stack):
 
         # AMI
         amzn_linux = ec2.AmazonLinuxImage(
-            generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022
+            generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022,
+            kernel=ec2.AmazonLinuxKernel.KERNEL5_X
         )
 
         # Instance Role and SSM Managed Policy
