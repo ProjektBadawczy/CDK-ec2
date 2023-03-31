@@ -23,7 +23,7 @@ class CdkEc2Stack(Stack):
                       )
 
         # AMI
-        amzn_linux = ec2.MachineImage.latest_amazon_linux(
+        amzn_linux = ec2.AmazonLinuxImage(
             generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022
         )
 
