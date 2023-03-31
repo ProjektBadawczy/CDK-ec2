@@ -26,8 +26,7 @@ class CdkEc2Stack(Stack):
         amzn_linux = ec2.MachineImage.latest_amazon_linux(
             generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022,
             edition=ec2.AmazonLinuxEdition.STANDARD,
-            virtualization=ec2.AmazonLinuxVirt.HVM,
-            storage=ec2.AmazonLinuxStorage.GENERAL_PURPOSE
+            virtualization=ec2.AmazonLinuxVirt.HVM
         )
 
         # Instance Role and SSM Managed Policy
