@@ -48,4 +48,4 @@ jobs:
       run: cdk synth
 
     - name: CDK Deploy
-      run: cdk deploy --require-approval never
+      run: cdk deploy CdkEc2Stack --parameters instanceType=${{ github.event.inputs.instance }} --require-approval never
