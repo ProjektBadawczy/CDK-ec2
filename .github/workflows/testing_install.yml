@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install docker
+      - name: Install Java and JMeter
         uses: appleboy/ssh-action@master
         with:
           key: ${{ secrets.SSH_KEY }}
