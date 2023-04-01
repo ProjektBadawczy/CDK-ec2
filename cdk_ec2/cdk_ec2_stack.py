@@ -23,7 +23,11 @@ class CdkEc2Stack(Stack):
                       )
 
         # AMI
-        amzn_linux = ec2.MachineImage.from_ssm_parameter('/aws/service/ami-amazon-linux-latest/al2022-ami-kernel-5.15-x86_64')
+        amzn_linux = ec2.MachineImage.latest_amazon_linux(
+            generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+            edition=ec2.AmazonLinuxEdition.STANDARD,
+            virtualization=ec2.AmazonLinuxVirt.HVM,
+            storage=ec2.AmazonLinuxStorage.GENERAL_PURPOSE)
 
         # Instance Role and SSM Managed Policy
         role = iam.Role(self, "InstanceSSM", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
