@@ -62,15 +62,19 @@ class CdkEc2Stack(Stack):
         instance_type = core.CfnParameter(self, "instanceType", type="String",
                                           description="The instance type for EC2 machines")
 
-        # Instance for applications
-        instance_applications = ec2.Instance(self, "InstanceApplications",
-            instance_type=ec2.InstanceType(instance_type.value_as_string),
-            machine_image=amzn_linux,
-            vpc=vpc,
-            role=role,
-            security_group=security_group,
-            key_name="ssh-key"
-            )
+        scaling_instances_number = core.CfnParameter(self, "scalingInstances", type="String",
+                                          description="The number of instances EC2 machines for scaling")
+
+        for i in range(1, int(scaling_instances_number.value_as_string)):
+            # Instance for applications
+            instance_applications = ec2.Instance(self, "InstanceApplications" + scaling_instances_number.value_as_string,
+                instance_type=ec2.InstanceType(instance_type.value_as_string),
+                machine_image=amzn_linux,
+                vpc=vpc,
+                role=role,
+                security_group=security_group,
+                key_name="ssh-key"
+                )
 
         # Instance for JMeter
         instance_testing = ec2.Instance(self, "InstanceTesting",
