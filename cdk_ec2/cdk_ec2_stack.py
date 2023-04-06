@@ -67,7 +67,7 @@ class CdkEc2Stack(Stack):
 
         for i in range(1, int(scaling_instances_number.value_as_string)):
             # Instance for applications
-            instance_applications = ec2.Instance(self, "InstanceApplications" + scaling_instances_number.value_as_string,
+            instance_applications = ec2.Instance(self, "InstanceApplications" + str(i),
                 instance_type=ec2.InstanceType(instance_type.value_as_string),
                 machine_image=amzn_linux,
                 vpc=vpc,
