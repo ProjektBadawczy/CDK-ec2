@@ -13,9 +13,6 @@ on:
         - t2.medium
         - t2.xlarge
         - t2.2xlarge
-      scaling_instances:
-        description: 'Instances number for scaling'     
-        required: true
         
 
 env:
@@ -50,4 +47,4 @@ jobs:
       run: cdk synth
 
     - name: CDK Deploy
-      run: cdk deploy CdkEc2Stack --parameters instanceType=${{ github.event.inputs.instance }} --parameters scalingInstances=${{ github.event.inputs.scaling_instances }} --require-approval never
+      run: cdk deploy CdkEc2Stack --parameters instanceType=${{ github.event.inputs.instance }} --require-approval never
