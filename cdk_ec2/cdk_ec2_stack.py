@@ -65,7 +65,7 @@ class CdkEc2Stack(Stack):
         scaling_instances_number = core.CfnParameter(self, "scalingInstances", type="Number",
                                           description="The number of instances EC2 machines for scaling")
 
-        for i in range(0, scaling_instances_number.value_as_number):
+        for i in range(0, int(scaling_instances_number.value_as_number)):
             # Instance for applications
             iteration = str(i)
             suffix = iteration.zfill(2)
