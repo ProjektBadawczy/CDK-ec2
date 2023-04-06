@@ -1,4 +1,4 @@
-name: "3. Connect to testing instance and install docker for JMeter"
+name: "3. Connect to testing instance and install Java and Apache Jmeter"
 
 on: workflow_dispatch
 
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install docker
+      - name: Install Java and JMeter
         uses: appleboy/ssh-action@master
         with:
           key: ${{ secrets.SSH_KEY }}
@@ -17,18 +17,8 @@ jobs:
           port: 22 
           script: |
             sudo yum update -y &&\
-              sudo yum install docker -y &&\
-               sudo service docker start &&\ 
-                 sudo usermod -a -G docker ec2-user &&\
-                  newgrp docker
-                  
-      - name: Install docker-compose
-        uses: appleboy/ssh-action@master
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          host: ${{ secrets.AWS_TESTING_DNS }}
-          username: ec2-user
-          port: 22 
-          script: |
-            sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose &&\
-             sudo chmod +x /usr/local/bin/docker-compose
+             sudo yum install java-17-amazon-corretto -y &&\
+                wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.5.tgz &&\
+                  sha512sum apache-jmeter-5.5.tgz &&\ 
+                    tar -xf apache-jmeter-5.5.tgz &&\
+                      rm apache-jmeter-5.5.tgz
