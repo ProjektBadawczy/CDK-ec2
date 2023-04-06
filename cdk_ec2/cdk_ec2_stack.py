@@ -59,6 +59,12 @@ class CdkEc2Stack(Stack):
             ec2.Port.tcp(22),
         )
 
+        # Docker swarm nodes
+        security_group.add_ingress_rule(
+            ec2.Peer.any_ipv4(),
+            ec2.Port.tcp(2377),
+        )
+
         instance_type = core.CfnParameter(self, "instanceType", type="String",
                                           description="The instance type for EC2 machines")
 
