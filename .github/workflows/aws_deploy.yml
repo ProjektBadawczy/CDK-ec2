@@ -8,10 +8,11 @@ on:
         required: true
         type: 'choice'
         options:
+        - t2.micro
+        - t2.small
+        - t2.medium
         - t2.xlarge
         - t2.2xlarge
-        - t3a.xlarge
-        - t3a.2xlarge
       scaling_instances:
         description: 'Instances number for scaling'     
         required: true
