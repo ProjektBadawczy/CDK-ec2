@@ -62,9 +62,6 @@ class CdkEc2Stack(Stack):
         instance_type = core.CfnParameter(self, "instanceType", type="String",
                                           description="The instance type for EC2 machines")
 
-        scaling_instances_number = core.CfnParameter(self, "scalingInstances", type="Number",
-                                                     description="The number of instances EC2 machines for scaling")
-
         ec2.Instance(self, "InstanceApplications01",
                      instance_type=ec2.InstanceType(instance_type.value_as_string),
                      machine_image=amzn_linux,
