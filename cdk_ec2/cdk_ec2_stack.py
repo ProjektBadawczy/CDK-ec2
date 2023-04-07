@@ -80,6 +80,11 @@ class CdkEc2Stack(Stack):
             ec2.Port.udp(4789),
         )
 
+        security_group.add_ingress_rule(
+            ec2.Peer.any_ipv6(),
+            ec2.Port.udp(4789),
+        )
+
         instance_type = core.CfnParameter(self, "instanceType", type="String",
                                           description="The instance type for EC2 machines")
 
