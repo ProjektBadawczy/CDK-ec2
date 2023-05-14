@@ -85,11 +85,14 @@ class CdkEc2Stack(Stack):
             ec2.Port.udp(4789),
         )
 
-        instance_type = core.CfnParameter(self, "instanceType", type="String",
-                                          description="The instance type for EC2 machines")
+        instance_type_application = core.CfnParameter(self, "instanceTypeApplication", type="String",
+                                          description="The instance type for EC2 machines for application")
+
+        instance_type_testing_tool = core.CfnParameter(self, "instanceTypeTestingTool", type="String",
+                                          description="The instance type for EC2 machines for testing tool")
 
         ec2.Instance(self, "InstanceApplications01",
-                     instance_type=ec2.InstanceType(instance_type.value_as_string),
+                     instance_type=ec2.InstanceType(instance_type_application.value_as_string),
                      machine_image=amzn_linux,
                      vpc=vpc,
                      role=role,
@@ -98,7 +101,7 @@ class CdkEc2Stack(Stack):
                      )
 
         ec2.Instance(self, "InstanceApplications02",
-                     instance_type=ec2.InstanceType(instance_type.value_as_string),
+                     instance_type=ec2.InstanceType(instance_type_application.value_as_string),
                      machine_image=amzn_linux,
                      vpc=vpc,
                      role=role,
@@ -108,7 +111,7 @@ class CdkEc2Stack(Stack):
 
         # Instance for JMeter
         ec2.Instance(self, "InstanceTesting",
-                     instance_type=ec2.InstanceType(instance_type.value_as_string),
+                     instance_type=ec2.InstanceType(instance_type_testing_tool.value_as_string),
                      machine_image=amzn_linux,
                      vpc=vpc,
                      role=role,
