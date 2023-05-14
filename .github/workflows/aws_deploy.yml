@@ -3,8 +3,18 @@ name: 1. Create AWS EC2 infrastracture
 on:
   workflow_dispatch:
     inputs:
-      instance:
-        description: 'Amazon EC2 T2 Instances'     
+      applicationInstance:
+        description: 'Amazon EC2 T2 Instances for application'     
+        required: true
+        type: 'choice'
+        options:
+        - t2.micro
+        - t2.small
+        - t2.medium
+        - t2.xlarge
+        - t2.2xlarge
+      testingToolInstance:
+        description: 'Amazon EC2 T2 Instances for testing tool'     
         required: true
         type: 'choice'
         options:
@@ -47,4 +57,4 @@ jobs:
       run: cdk synth
 
     - name: CDK Deploy
-      run: cdk deploy CdkEc2Stack --parameters instanceType=${{ github.event.inputs.instance }} --require-approval never
+      run: cdk deploy CdkEc2Stack --parameters instanceTypeApplication=${{ github.event.inputs.applicationInstance }} --parameters instanceTypeTestingTool=${{ github.event.inputs.testingToolInstance }} --require-approval never
