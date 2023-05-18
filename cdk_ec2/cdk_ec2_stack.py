@@ -87,7 +87,7 @@ class CdkEc2Stack(Stack):
                                           description="The instance type for EC2 machines for application")
 
 
-        ec2.Instance(self, "InstanceApplications01",
+        ec2.Instance(self, "InstanceApplications01b",
                      instance_type=ec2.InstanceType(instance_type_application.value_as_string),
                      machine_image=amzn_linux,
                      vpc=vpc,
@@ -106,7 +106,7 @@ class CdkEc2Stack(Stack):
 #                      )
 
         # Instance for JMeter
-        ec2.Instance(self, "InstanceTesting",
+        ec2.Instance(self, "InstanceTestingb",
                      instance_type=ec2.InstanceType("m4.xlarge"),
                      machine_image=amzn_linux,
                      vpc=vpc,
