@@ -8,6 +8,7 @@ on:
         required: true
         type: 'choice'
         options:
+        - a1.medium
         - m4.large
         - m4.xlarge
         - m4.2xlarge
