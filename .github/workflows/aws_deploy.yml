@@ -12,7 +12,7 @@ on:
         - m4.xlarge
         - m4.2xlarge
 env:
-  AWS_REGION: eu-north-1
+  AWS_REGION: eu-central-1
   
 jobs:
   create:
