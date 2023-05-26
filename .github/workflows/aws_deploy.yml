@@ -11,7 +11,6 @@ on:
         - m4.large
         - m4.xlarge
         - m4.2xlarge
-        - m4.4xlarge
 env:
   AWS_REGION: eu-central-1
   
