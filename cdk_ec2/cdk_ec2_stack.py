@@ -96,14 +96,14 @@ class CdkEc2Stack(Stack):
                      key_name="ssh-key"
                      )
 
-#         ec2.Instance(self, "InstanceApplications02",
-#                      instance_type=ec2.InstanceType(instance_type_application.value_as_string),
-#                      machine_image=amzn_linux,
-#                      vpc=vpc,
-#                      role=role,
-#                      security_group=security_group,
-#                      key_name="ssh-key"
-#                      )
+        ec2.Instance(self, "InstanceApplications02",
+                     instance_type=ec2.InstanceType(instance_type_application.value_as_string),
+                     machine_image=amzn_linux,
+                     vpc=vpc,
+                     role=role,
+                     security_group=security_group,
+                     key_name="ssh-key"
+                     )
         
         
 #         ec2.Instance(self, "InstanceApplications03",
@@ -125,12 +125,12 @@ class CdkEc2Stack(Stack):
 #                      key_name="ssh-key"
 #                      )
 
-        # Instance for JMeter
-        ec2.Instance(self, "InstanceTesting",
-                     instance_type=ec2.InstanceType("m4.xlarge"),
-                     machine_image=amzn_linux,
-                     vpc=vpc,
-                     role=role,
-                     security_group=security_group,
-                     key_name="ssh-key"
-                     )
+#         # Instance for JMeter
+#         ec2.Instance(self, "InstanceTesting",
+#                      instance_type=ec2.InstanceType("m4.xlarge"),
+#                      machine_image=amzn_linux,
+#                      vpc=vpc,
+#                      role=role,
+#                      security_group=security_group,
+#                      key_name="ssh-key"
+#                      )
